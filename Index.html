@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Para minha Evelin 💖</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      color: #fff;
+      text-align: center;
+      overflow: hidden; /* deixa os corações caírem fora da tela */
+    }
+    h1 {
+      font-size: 2.8em;
+      margin-bottom: 0.2em;
+      z-index: 2;
+    }
+    p {
+      font-size: 1.4em;
+      margin-bottom: 1em;
+      z-index: 2;
+    }
+    #timer {
+      font-size: 1.5em;
+      margin: 20px 0;
+      background: rgba(255,255,255,0.2);
+      padding: 15px 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+    button {
+      background-color: #fff;
+      color: #ff5e7e;
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+      z-index: 2;
+    }
+    button:hover {
+      background-color: #ffe3ec;
+    }
+
+    /* corações animados */
+    .heart {
+      position: absolute;
+      top: -20px;
+      color: #ff5e7e;
+      font-size: 24px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Para a macaquinha mais linda desse mundo, te amo minha vidona 💖</h1>
+  <p>Aqui embaixo está passando um tempo, e a cada segundo que passa, Eu te amo mais...</p>
+  
+  <div id="timer">Carregando tempo de namoro...</div>
+  
+  <button onclick="mostrarMensagem()">Perta Aqui Mo 🙈💘</button>
+
+  <script>
+    // Data de início do namoro
+    const dataNamoro = new Date("2024-02-02T00:00:00");
+
+    function atualizarTempo() {
+      const agora = new Date();
+      let anos = agora.getFullYear() - dataNamoro.getFullYear();
+      let meses = agora.getMonth() - dataNamoro.getMonth();
+      let dias = agora.getDate() - dataNamoro.getDate();
+      let horas = agora.getHours() - dataNamoro.getHours();
+      let minutos = agora.getMinutes() - dataNamoro.getMinutes();
+      let segundos = agora.getSeconds() - dataNamoro.getSeconds();
+
+      if (segundos < 0) { segundos += 60; minutos--; }
+      if (minutos < 0) { minutos += 60; horas--; }
+      if (horas < 0) { horas += 24; dias--; }
+      if (dias < 0) {
+        const ultimoMes = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+        dias += ultimoMes;
+        meses--;
+      }
+      if (meses < 0) { meses += 12; anos--; }
+
+      document.getElementById("timer").innerText = 
+        `${anos} anos, ${meses} meses, ${dias} dias, ${horas}h ${minutos}m ${segundos}s 💕`;
+    }
+
+    setInterval(atualizarTempo, 1000);
+    atualizarTempo();
+
+    function mostrarMensagem() {
+      alert("Mo, cada segundo com você é o mais precioso da minha vida, e por esse motivo não vejo a hora de te dar nosso salsicho e casar com você. Te amo! 💕");
+    }
+
+    // Criar corações caindo
+    function criarCoracao() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+      heart.style.animationDuration = (Math.random() * 3 + 3) + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => { heart.remove(); }, 6000);
+    }
+
+    setInterval(criarCoracao, 400);
+  </script>
+</body>
+</html>
